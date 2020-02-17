@@ -13,11 +13,7 @@ function App() {
     const dataTeam = e.target.getAttribute('data-team'),
     dataScore = parseInt(e.target.getAttribute('data-score'));
 
-    if(dataTeam === 'home') {
-      setHomeScore(homeScore += dataScore);
-    } else if (dataTeam === 'away') {
-      setAwayScore(awayScore += dataScore);
-    }
+    dataTeam === 'home' ? setHomeScore(homeScore += dataScore) : setAwayScore(awayScore += dataScore);
   };
  
   return (
