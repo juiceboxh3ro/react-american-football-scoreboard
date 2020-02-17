@@ -6,23 +6,20 @@ import BottomRow from "./BottomRow";
 function App() {
   //TODO: STEP 2 - Establish your application's state with some useState hooks.  You'll need one for the home score and another for the away score.
 
-  const [homeScore, setHomeScore] = useState(0); 
+  let [homeScore, setHomeScore] = useState(0), 
+  [awayScore, setAwayScore] = useState(0); 
 
-  const [awayScore, setAwayScore] = useState(0); 
+  const increaseScore = e => {
+    const dataTeam = e.target.getAttribute('data-team'),
+    dataScore = parseInt(e.target.getAttribute('data-score'));
 
-  const setHomeField = e => {
-    setHomeScore(homeScore + 3);
+    if(dataTeam === 'home') {
+      setHomeScore(homeScore += dataScore);
+    } else if (dataTeam === 'away') {
+      setAwayScore(awayScore += dataScore);
+    }
   };
-  const setHomeTouch = e => {
-    setHomeScore(homeScore + 7);
-  };
-  const setAwayField = e => {
-    setAwayScore(awayScore + 3);
-  };
-  const setAwayTouch = e => {
-    setAwayScore(awayScore + 7);
-  };
-  
+ 
   return (
     <div className="container">
       <section className="scoreboard">
@@ -45,12 +42,12 @@ function App() {
       <section className="buttons">
         <div className="homeButtons">
           {/* TODO STEP 4 - Now we need to attach our state setter functions to click listeners. */}
-          <button onClick={setHomeTouch} className="homeButtons__touchdown">Home Touchdown</button>
-          <button onClick={setHomeField} className="homeButtons__fieldGoal">Home Field Goal</button>
+          <button onClick={increaseScore} data-team="home" data-score="7" className="homeButtons__touchdown">Home Touchdown</button>
+          <button onClick={increaseScore} data-team="home" data-score="3" className="homeButtons__fieldGoal">Home Field Goal</button>
         </div>
         <div className="awayButtons">
-          <button onClick={setAwayTouch} className="awayButtons__touchdown">Away Touchdown</button>
-          <button onClick={setAwayField} className="awayButtons__fieldGoal">Away Field Goal</button>
+          <button onClick={increaseScore} data-team="away" data-score="7" className="awayButtons__touchdown">Away Touchdown</button>
+          <button onClick={increaseScore} data-team="away" data-score="3" className="awayButtons__fieldGoal">Away Field Goal</button>
         </div>
       </section>
     </div>
